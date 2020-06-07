@@ -22,12 +22,18 @@ public class Human extends Automata{
             this.yPosition--;
         }
     }
-    
     public void initiateDecisionTree(Automata zombie){
-        // 1. first if-statement does comparision of human and zombie size
+        int randomNumber = (int) this.p.random(100);
+        if(this.getSize() > zombie.getSize()){
+            if(randomNumber < LARGER_THAN_ODDS){
+
+            }
+        }
+    }
+    //public void initiateDecisionTree(Automata zombie){
         // if(human.getSize() > z.getSize()){
-        //     2. second if-statement makes a decision on whether human wins or loses based on the weighted probability. 
-        //     If block is human winning sequence
+        //     2. second if-statement makes a decision on whether human wins or loses based on the weighted probability.
+    //        //     If block is human winning sequence
         //     if(randomNumber < LARGER_THAN_ODDS){
         //             zombie loses!
         //             set off particle system at human coordinates
@@ -82,7 +88,7 @@ public class Human extends Automata{
             //                  remove human from arraylist
             //}
         //}
-    }
+    //}
 
 
     public boolean infectedByZombie(int probability){

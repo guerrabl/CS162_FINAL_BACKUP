@@ -1,6 +1,8 @@
 import processing.core.PApplet;
+import java.util.ArrayList;
 
 public abstract class Automata {
+    public static ArrayList<ParticleSystem> explosions = new ArrayList<ParticleSystem>();
     public static int SMALLER_THAN_ODDS;
     public static int EQUIVALENT_ODDS;
     public static int LARGER_THAN_ODDS;
@@ -36,6 +38,17 @@ public abstract class Automata {
 
     public boolean detectCollision(Automata automata){
         return (p.dist(this.xPosition,this.yPosition, automata.xPosition, automata.yPosition) < ((this.size/2)+(automata.size/2)));
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    public void addToExplosions(Automata automata){
+        this.explosions
     }
     public abstract void walk();
     public abstract void initiateDecisionTree(Automata a);
