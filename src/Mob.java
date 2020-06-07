@@ -28,7 +28,7 @@ public abstract class Mob {
         for(Automata a: mob){
             for(Automata z: checkMob){
                 if (a.detectCollision(z)){
-                    System.out.println("Touching");
+
                 }
             }
         }

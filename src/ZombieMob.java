@@ -13,7 +13,7 @@ public class ZombieMob extends Mob{
     public void fillMob(){
         for(int i=0; i < mobPopulation; ++i){
             if(rGen.nextBoolean()){
-                mob.add(new Zombie(this.sketch,(int) sketch.random(0, sketch.width),(int) sketch.random(0, sketch.height/2)));
+                mob.add(new Zombie(this.p,(int) p.random(0, p.width),(int) p.random(0, p.height/2)));
             }
         }
     }
@@ -24,8 +24,8 @@ public class ZombieMob extends Mob{
         }
     }
     @Override
-    void removeFromSimulation() {
-
+    void removeFromSimulation(Zombie zombie) {
+        mob.
     }
 
     @Override

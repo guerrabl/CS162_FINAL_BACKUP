@@ -6,7 +6,7 @@ public abstract class Automata {
     public static int SMALLER_THAN_ODDS;
     public static int EQUIVALENT_ODDS;
     public static int LARGER_THAN_ODDS;
-    public boolean wonConfrontation;
+    public boolean dead;
     public int xPosition;
     public int yPosition;
     public PApplet p;
@@ -17,6 +17,7 @@ public abstract class Automata {
     Automata(PApplet p, int xPosition, int yPosition){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
+        this.dead = false;
         this.p = p;
     }
 
@@ -47,9 +48,36 @@ public abstract class Automata {
     public void setSize(int size) {
         this.size = size;
     }
-    public void addToExplosions(Automata automata){
-        this.explosions
+
+
+    public void addToExplosions(PApplet p){
+        this.explosions.add(new ParticleSystem(this.getxPosition(), this.getyPosition(), p));
     }
+
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    public void setxPosition(int xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public int getyPosition() {
+        return yPosition;
+    }
+
+    public void setyPosition(int yPosition) {
+        this.yPosition = yPosition;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void died() {
+        this.dead = true;
+    }
+
     public abstract void walk();
     public abstract void initiateDecisionTree(Automata a);
 
