@@ -1,0 +1,65 @@
+@startuml
+
+title __SRC's Class Diagram__\n
+
+    class Human {
+        ~ Human()
+    }
+
+    class HumanMob {
+    }
+
+    abstract class Mob {
+        + mob : ArrayList<Particle>
+        + mobPopulation : int
+        ~ p : PApplet
+        ~ Mob()
+    }
+
+    class Particle {
+        ~ ACCELERATION : double
+        ~ c : int
+        ~ p : PApplet
+        ~ size : float
+        ~ x : float
+        ~ xVelocity : float
+        ~ y : float
+        ~ yVelocity : float
+        ~ Particle()
+        ~ Particle()
+        ~ draw()
+        ~ move()
+    }
+  
+
+
+    class ParticleSystem {
+        ~ NUMBER_OF_PARTICLES : int
+        ~ p : PApplet
+        ~ particles : ArrayList<Particle>
+        ~ x : int
+        ~ y : int
+        ~ ParticleSystem()
+        ~ ParticleSystem()
+        ~ draw()
+        ~ update()
+    }
+
+    class View {
+    }
+
+    class Zombie {
+        ~ Zombie()
+    }
+
+    class ZombieMob {
+    }
+
+
+  Human -up-|> Particle
+  Mob -up-|> processing.core.PApplet
+  Sketch -up-|> processing.core.PApplet
+  Sketch o-- ParticleSystem : sys
+  Zombie -up-|> Particle
+
+@enduml
