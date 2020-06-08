@@ -7,6 +7,16 @@ public class UI implements Simulator{
     public static ArrayList<Automata[]> collidingObjects = new ArrayList<Automata[]>();
     public static PApplet p = new PApplet();
     public static int mobPopulation = mobPopulation = (int)p.random(50,300);
+//Did not have time user input working properly
+//    final static String openingString = "Enter number between 0 and 100 to set the probability for the event that ";
+//    public static int SMALLPROBABILITY = UI.getUserInput(openingString + "the smaller automaton defeats the larger ");
+//    public static int MEDIUMPROBABILITY = UI.getUserInput(openingString + "the larger automaton defeats the smaller ");
+//    public static int LARGEPROBABILITY = UI.getUserInput(openingString + "when both automaton are the same size");
+//    public static int INFECTIONPROBBABILITY = UI.getUserInput(openingString + "the human turns in to a zombie rather dying");
+    public static int SMALLPROBABILITY = 15;
+    public static int MEDIUMPROBABILITY = 50;
+    public static int LARGEPROBABILITY = 70;
+    public static int INFECTIONPROBBABILITY = 20;
     public static void displayCounts(HumanMob m, ZombieMob z, PApplet p){
         p.text(m.getMob().size(), p.width/2, (float) ((float) p.height*.9));
         p.text(z.getMob().size(), p.width/2, (float) ((float) p.height*.1));
@@ -59,4 +69,5 @@ public class UI implements Simulator{
             collidingObjects.remove(i);
         }
     }
+
 }

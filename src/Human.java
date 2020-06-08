@@ -78,7 +78,7 @@ public class Human extends Automata {
     }
 
     public void zombieWinsBranch(Automata zombie, Mob zombieMob){
-        if (infectedByZombie(20)) {
+        if (infectedByZombie(UI.INFECTIONPROBBABILITY)) {
             float tempX = this.getxPosition();
             float tempY = this.getyPosition();
             int tempSize = this.getSize();

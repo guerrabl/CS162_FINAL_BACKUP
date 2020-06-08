@@ -2,13 +2,12 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 public abstract class Automata {
-    public static int SMALLER_THAN_ODDS = 20;
-    public static int EQUIVALENT_ODDS = 50;
-    public static int LARGER_THAN_ODDS = 75;
+    public static int SMALLER_THAN_ODDS = UI.SMALLPROBABILITY;
+    public static int EQUIVALENT_ODDS = UI.MEDIUMPROBABILITY;
+    public static int LARGER_THAN_ODDS = UI.LARGEPROBABILITY;
 
     private boolean dead;
     private boolean currentlyInBattle;
-
     protected PApplet p;
     protected float xPosition;
     protected float yPosition;

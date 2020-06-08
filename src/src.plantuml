@@ -2,64 +2,233 @@
 
 title __SRC's Class Diagram__\n
 
+  namespace  {
+    abstract class Automata {
+        {static} + EQUIVALENT_ODDS : int
+        {static} + LARGER_THAN_ODDS : int
+        {static} + SMALLER_THAN_ODDS : int
+        # colour : int
+        # p : PApplet
+        # size : int
+        # xPosition : float
+        # yPosition : float
+        - currentlyInBattle : boolean
+        - dead : boolean
+        + addToExplosions()
+        + detectCollision()
+        + died()
+        + display()
+        + getSize()
+        + getxPosition()
+        + getyPosition()
+        + isDead()
+        + probabilisticSize()
+        + setCurrentlyInBattle()
+        + setSize()
+        {abstract} + walk()
+        ~ Automata()
+    }
+  }
+  
+
+  namespace  {
     class Human {
+        ~ sound : SoundFile
+        - infected : boolean
+        + decideCollisonOutcome()
+        + humanWinsBranch()
+        + infectedByZombie()
+        + isInfected()
+        + setInfected()
+        + walk()
+        + zombieWinsBranch()
         ~ Human()
     }
+  }
+  
 
+  namespace  {
     class HumanMob {
+        + fillMob()
+        + listenForInfections()
+        ~ HumanMob()
     }
+  }
+  
 
+  namespace  {
+    class Main {
+        {static} - OPTIONS : String[]
+        {static} + main()
+    }
+  }
+  
+
+  namespace  {
     abstract class Mob {
-        + mob : ArrayList<Particle>
-        + mobPopulation : int
-        ~ p : PApplet
+        {static} + explosions : ArrayList<ParticleSystem>
+        + p : PApplet
+        {static} + rGen : RandomGenerator
+        # mob : ArrayList<Automata>
+        + getMob()
+        + listenForDead()
+        + moveMob()
         ~ Mob()
+        ~ addToSimulation()
+        {abstract} ~ fillMob()
     }
+  }
+  
 
+  namespace  {
+    class OpenSimplexNoise {
+        {static} - DEFAULT_SEED : long
+        {static} - NORM_CONSTANT_2D : double
+        {static} - NORM_CONSTANT_3D : double
+        {static} - NORM_CONSTANT_4D : double
+        {static} - SQUISH_CONSTANT_2D : double
+        {static} - SQUISH_CONSTANT_3D : double
+        {static} - SQUISH_CONSTANT_4D : double
+        {static} - STRETCH_CONSTANT_2D : double
+        {static} - STRETCH_CONSTANT_3D : double
+        {static} - STRETCH_CONSTANT_4D : double
+        {static} - gradients2D : byte[]
+        {static} - gradients3D : byte[]
+        {static} - gradients4D : byte[]
+        - perm : short[]
+        - permGradIndex3D : short[]
+        + OpenSimplexNoise()
+        + OpenSimplexNoise()
+        + OpenSimplexNoise()
+        + eval()
+        + eval()
+        + eval()
+        - extrapolate()
+        - extrapolate()
+        - extrapolate()
+        {static} - fastFloor()
+    }
+  }
+  
+
+  namespace  {
     class Particle {
         ~ ACCELERATION : double
-        ~ c : int
         ~ p : PApplet
-        ~ size : float
-        ~ x : float
-        ~ xVelocity : float
-        ~ y : float
-        ~ yVelocity : float
+        - colour : int
+        - size : float
+        - x : float
+        - xVelocity : float
+        - y : float
+        - yVelocity : float
         ~ Particle()
         ~ Particle()
         ~ draw()
         ~ move()
+        ~ onScreen()
     }
+  }
   
 
-
+  namespace  {
     class ParticleSystem {
-        ~ NUMBER_OF_PARTICLES : int
-        ~ p : PApplet
-        ~ particles : ArrayList<Particle>
-        ~ x : int
-        ~ y : int
+        - NUMBER_OF_PARTICLES : int
+        - p : PApplet
+        - particles : ArrayList<Particle>
+        - x : float
+        - y : float
+        + getParticles()
+        + isFinished()
         ~ ParticleSystem()
         ~ ParticleSystem()
         ~ draw()
         ~ update()
     }
+  }
+  
 
-    class View {
+  namespace  {
+    interface Simulator {
+        {abstract} + addCollidingPairs()
+        {abstract} + findCollidingPairs()
+        {abstract} + runSimulation()
+        {abstract} + updateExplosions()
     }
+  }
+  
 
+  namespace  {
+    class Sketch {
+        ~ INFECTIONPROBBABILITY : int
+        ~ LARGEPROBABILITY : int
+        ~ MEDIUMPROBABILITY : int
+        ~ SMALLPROBABILITY : int
+        ~ increment : float
+        ~ openingString : String
+        ~ zincrement : float
+        ~ zoff : float
+        + doThings()
+        + draw()
+        + settings()
+        + setup()
+    }
+  }
+  
+
+  namespace  {
+    class UI {
+        {static} + INFECTIONPROBBABILITY : int
+        {static} + LARGEPROBABILITY : int
+        {static} + MEDIUMPROBABILITY : int
+        {static} + SMALLPROBABILITY : int
+        {static} + collidingObjects : ArrayList<Automata[]>
+        {static} + mobPopulation : int
+        {static} + p : PApplet
+        {static} ~ openingString : String
+        + addCollidingPairs()
+        {static} + displayCounts()
+        + findCollidingPairs()
+        {static} + getUserInput()
+        + runSimulation()
+        + updateExplosions()
+    }
+  }
+  
+
+  namespace  {
     class Zombie {
+        + walk()
         ~ Zombie()
     }
+  }
+  
 
+  namespace  {
     class ZombieMob {
+        + fillMob()
+        + moveMob()
+        ~ ZombieMob()
     }
+  }
+  
 
-
-  Human -up-|> Particle
-  Mob -up-|> processing.core.PApplet
+  Human -up-|> Automata
+  HumanMob -up-|> Mob
   Sketch -up-|> processing.core.PApplet
-  Sketch o-- ParticleSystem : sys
-  Zombie -up-|> Particle
+  Sketch o-- HumanMob : humanMob
+  Sketch o-- OpenSimplexNoise : noise
+  Sketch o-- UI : sim
+  Sketch o-- ZombieMob : zombieMob
+  UI .up.|> Simulator
+  Zombie -up-|> Automata
+  ZombieMob -up-|> Mob
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
 
 @enduml
