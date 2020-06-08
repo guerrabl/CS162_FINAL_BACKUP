@@ -1,8 +1,9 @@
 import processing.core.PApplet;
 import java.util.Scanner;
+
 public class UI {
-
-
+    public static PApplet p = new PApplet();
+    public static int mobPopulation = mobPopulation = (int)p.random(50,300);
     public static void displayCounts(HumanMob m, ZombieMob z, PApplet p){
         p.text(m.getMob().size(), p.width/2, (float) ((float) p.height*.9));
         p.text(z.getMob().size(), p.width/2, (float) ((float) p.height*.1));

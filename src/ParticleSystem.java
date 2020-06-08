@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class ParticleSystem {
 
-    final int NUMBER_OF_PARTICLES = 50;
-    ArrayList<Particle> particles;
-    PApplet p;
-    float x;
-    float y;
+    private final int NUMBER_OF_PARTICLES = 50;
+    private ArrayList<Particle> particles;
+    private PApplet p;
+    private float x;
+    private float y;
 
     ParticleSystem(PApplet p) {
         particles = new ArrayList<Particle>();
@@ -40,32 +40,18 @@ public class ParticleSystem {
         for (Particle p : particles) p.draw();
     }
 
-    public int getNUMBER_OF_PARTICLES() {
-        return NUMBER_OF_PARTICLES;
-    }
-
     public ArrayList<Particle> getParticles() {
         return particles;
     }
 
-    public void setParticles(ArrayList<Particle> particles) {
-        this.particles = particles;
+    public boolean isFinished(){
+        boolean allParticlesOffScreen = true;
+        for (Particle p: particles) {
+            if(p.onScreen()){
+                allParticlesOffScreen = false;
+                break;
+            }
+        }
+        return allParticlesOffScreen;
     }
-
-    public float getX() {
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
 }

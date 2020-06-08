@@ -5,12 +5,12 @@ public class Particle {
 
     final double ACCELERATION = 0.1;
 
-    float x;
-    float y;
-    float xVelocity;
-    float yVelocity;
-    int colour;
-    float size;
+    private float x;
+    private float y;
+    private float xVelocity;
+    private float yVelocity;
+    private int colour;
+    private float size;
 
     Particle(PApplet p) {
         this.p=p;
@@ -44,37 +44,7 @@ public class Particle {
         yVelocity += ACCELERATION;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getxVelocity() {
-
-        return xVelocity;
-    }
-
-    public void setxVelocity(float xVelocity) {
-        this.xVelocity = xVelocity;
-    }
-
-    public int getColour() {
-        return colour;
-    }
-
-    public void setColour(int colour) {
-
-        this.colour = colour;
+    boolean onScreen(){
+        return x < p.width && x > 0 && y > 0 && y < p.height;
     }
 }

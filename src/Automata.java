@@ -2,16 +2,18 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 public abstract class Automata {
-    public static int SMALLER_THAN_ODDS = 10;
+    public static int SMALLER_THAN_ODDS = 20;
     public static int EQUIVALENT_ODDS = 50;
-    public static int LARGER_THAN_ODDS = 90;
-    public boolean dead;
-    public boolean currentlyInBattle;
-    public float xPosition;
-    public float yPosition;
-    public PApplet p;
-    public int size;
-    int colour;
+    public static int LARGER_THAN_ODDS = 75;
+
+    private boolean dead;
+    private boolean currentlyInBattle;
+
+    protected PApplet p;
+    protected float xPosition;
+    protected float yPosition;
+    protected int size;
+    protected int colour;
 
 
     Automata(PApplet p, float xPosition, float yPosition){
@@ -42,6 +44,10 @@ public abstract class Automata {
         return (p.dist(this.xPosition,this.yPosition, automata.xPosition, automata.yPosition) < ((this.size/2)+(automata.size/2)));
     }
 
+    public void addToExplosions(PApplet p){
+        Mob.explosions.add(new ParticleSystem(this.getxPosition(), this.getyPosition(), p));
+    }
+
     public int getSize() {
         return size;
     }
@@ -50,33 +56,15 @@ public abstract class Automata {
         this.size = size;
     }
 
-
-    public void addToExplosions(PApplet p){
-        Mob.explosions.add(new ParticleSystem(this.getxPosition(), this.getyPosition(), p));
-    }
-
     public float getxPosition() {
         return xPosition;
     }
-
-    public boolean isCurrentlyInBattle() {
-        return currentlyInBattle;
-    }
-
-    public void setCurrentlyInBattle() {
-        this.currentlyInBattle = !this.currentlyInBattle;
-    }
-
-    public void setxPosition(int xPosition) {
-        this.xPosition = xPosition;
-    }
-
     public float getyPosition() {
         return yPosition;
     }
 
-    public void setyPosition(int yPosition) {
-        this.yPosition = yPosition;
+    public void setCurrentlyInBattle() {
+        this.currentlyInBattle = !this.currentlyInBattle;
     }
 
     public boolean isDead() {

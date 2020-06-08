@@ -28,21 +28,8 @@ public class Sketch extends PApplet{
         humanMob.moveMob();
         zombieMob.moveMob();
         findCollidingPairs();
-        for(int i=collidingObjects.size()-1; i >= 0; --i){
-            Automata[] pair = collidingObjects.get(i);
-            Human human = (Human)pair[0];
-            Zombie zombie = (Zombie)pair[1];
-            humanMob.listenForInfections();
-            humanMob.listenForDead();
-            zombieMob.listenForDead();
-            human.decideCollisonOutcome(zombie, zombieMob, this);
-            collidingObjects.remove(i);
-        }
-
-        for(int i=0; i < Mob.explosions.size(); ++i){
-            Mob.explosions.get(i).draw();
-            Mob.explosions.get(i).update();
-        }
+        runSimulation();
+        updateExplosions();
     }
 
     public Automata[] addCollidingPairs(Human human, Zombie zombie){
@@ -60,6 +47,30 @@ public class Sketch extends PApplet{
                     collidingObjects.add(addCollidingPairs((Human)human, (Zombie) zombie));
                 }
             }
+        }
+    }
+
+    public void updateExplosions(){
+        for(int i = Mob.explosions.size()-1; i >= 0; i--){
+            Mob.explosions.get(i).draw();
+            Mob.explosions.get(i).update();
+            if(Mob.explosions.get(i).isFinished()){
+                Mob.explosions.remove(i);
+            }
+
+        }
+    }
+
+    public void runSimulation(){
+        for(int i=collidingObjects.size()-1; i >= 0; --i){
+            Automata[] pair = collidingObjects.get(i);
+            Human human = (Human)pair[0];
+            Zombie zombie = (Zombie)pair[1];
+            humanMob.listenForInfections();
+            humanMob.listenForDead();
+            zombieMob.listenForDead();
+            human.decideCollisonOutcome(zombie, zombieMob, this);
+            collidingObjects.remove(i);
         }
     }
 }

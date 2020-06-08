@@ -2,7 +2,7 @@ import processing.core.PApplet;
 
 public class Human extends Automata {
 
-    public boolean infected;
+    private boolean infected;
 
     Human(PApplet sketch, float xPosition, float yPosition) {
         super(sketch, xPosition, yPosition);
@@ -56,7 +56,7 @@ public class Human extends Automata {
         return infected;
     }
 
-    public void hasBeenInfected () {
+    public void setInfected () {
         this.infected = true;
     }
 
@@ -80,12 +80,13 @@ public class Human extends Automata {
             float tempX = this.getxPosition();
             float tempY = this.getyPosition();
             int tempSize = this.getSize();
-            //sets infected to true
-            this.hasBeenInfected();
+            this.setInfected();
+
             Zombie infectedHuman = new Zombie(p,tempX, tempY);
             infectedHuman.setSize(tempSize);
             zombieMob.addToSimulation(infectedHuman);
             zombie.setCurrentlyInBattle();
+
         } else {
             this.died();
             zombie.setCurrentlyInBattle();

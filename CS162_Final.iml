@@ -9,5 +9,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="core" level="application" />
     <orderEntry type="library" exported="" name="acm" level="application" />
+    <orderEntry type="library" name="javamp3-1.0.4" level="application" />
+    <orderEntry type="library" name="jsyn-20171016" level="application" />
+    <orderEntry type="library" name="sound" level="application" />
   </component>
 </module>
