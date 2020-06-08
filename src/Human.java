@@ -1,14 +1,16 @@
 import processing.core.PApplet;
+import processing.sound.*;
 
 public class Human extends Automata {
 
     private boolean infected;
-
+    SoundFile sound;
     Human(PApplet sketch, float xPosition, float yPosition) {
         super(sketch, xPosition, yPosition);
         colour = sketch.color(0, 40, 200, (int) sketch.random(0, 255));
         infected = false;
         size = probabilisticSize();
+        sound = new SoundFile(sketch, "ouch.wav");
     }
 
     @Override
@@ -71,7 +73,7 @@ public class Human extends Automata {
         zombie.addToExplosions(p);
         zombie.died();
         // Mob classes will include event listener that listens for when zombies dead flag is true, and remove those instances from arraylist while loop?
-        //TODO make sound go off
+        sound.play();
         this.setCurrentlyInBattle();
     }
 

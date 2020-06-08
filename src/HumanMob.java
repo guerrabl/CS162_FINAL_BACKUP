@@ -9,6 +9,7 @@ public class HumanMob extends Mob{
         this.mob = new ArrayList<Automata>();
 
     }
+
     @Override
     public void fillMob(){
         for(int i=0; i < UI.mobPopulation; ++i){
@@ -21,12 +22,7 @@ public class HumanMob extends Mob{
         }
     }
 
-    public void moveMob(){
-        for(Automata a: this.mob){
-            a.display();
-            a.walk();
-        }
-    }
+
 
     public void listenForInfections(){
         for(int i = mob.size()-1; i >= 0; i--){

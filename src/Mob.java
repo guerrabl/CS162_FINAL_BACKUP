@@ -27,7 +27,12 @@ public abstract class Mob {
             }
         }
     }
-
+    public void moveMob(){
+        for(Automata a: this.mob){
+            a.display();
+            a.walk();
+        }
+    }
     void addToSimulation(Automata a) {
         mob.add(a);
     }

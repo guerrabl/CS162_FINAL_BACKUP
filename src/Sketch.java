@@ -5,16 +5,17 @@ public class Sketch extends PApplet{
 
     HumanMob humanMob;
     ZombieMob zombieMob;
-    ArrayList<Automata[]> collidingObjects = new ArrayList<Automata[]>();
+    UI sim;
     final String openingString = "Enter number between 0 and 100 to set the probability for the event that ";
-    int userNumber = UI.getUserInput("Enter a Number");
-    int SMALLPROBABILITY = UI.getUserInput(openingString + "Smaller defeats ");
+//    int userNumber = UI.getUserInput("Enter a Number");
+//    int SMALLPROBABILITY = UI.getUserInput(openingString + "Smaller defeats ");
 
     public void settings(){
         size(500,500);
     }
 
     public void setup(){
+        sim = new UI();
         humanMob = new HumanMob(this);
         humanMob.fillMob();
         zombieMob = new ZombieMob(this);
@@ -27,51 +28,10 @@ public class Sketch extends PApplet{
         UI.displayCounts(humanMob,zombieMob,this);
         humanMob.moveMob();
         zombieMob.moveMob();
-        findCollidingPairs();
-        runSimulation();
-        updateExplosions();
+        sim.findCollidingPairs(humanMob, zombieMob);
+        sim.runSimulation(humanMob, zombieMob, this);
+        sim.updateExplosions();
     }
 
-    public Automata[] addCollidingPairs(Human human, Zombie zombie){
-        Automata[] collidingPair = new Automata[2];
-        collidingPair[0] = human;
-        collidingPair[1] = zombie;
-        return collidingPair;
-    }
-
-    public void findCollidingPairs(){
-        for(Automata human: humanMob.getMob()){
-            for(Automata zombie: zombieMob.getMob()){
-                human = (Human)human;
-                if(human.detectCollision(zombie)) {
-                    collidingObjects.add(addCollidingPairs((Human)human, (Zombie) zombie));
-                }
-            }
-        }
-    }
-
-    public void updateExplosions(){
-        for(int i = Mob.explosions.size()-1; i >= 0; i--){
-            Mob.explosions.get(i).draw();
-            Mob.explosions.get(i).update();
-            if(Mob.explosions.get(i).isFinished()){
-                Mob.explosions.remove(i);
-            }
-
-        }
-    }
-
-    public void runSimulation(){
-        for(int i=collidingObjects.size()-1; i >= 0; --i){
-            Automata[] pair = collidingObjects.get(i);
-            Human human = (Human)pair[0];
-            Zombie zombie = (Zombie)pair[1];
-            humanMob.listenForInfections();
-            humanMob.listenForDead();
-            zombieMob.listenForDead();
-            human.decideCollisonOutcome(zombie, zombieMob, this);
-            collidingObjects.remove(i);
-        }
-    }
 }
 
