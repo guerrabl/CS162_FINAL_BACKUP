@@ -1,5 +1,8 @@
+// Zombie Outbreak Simulator
+// CS162 -Intro to Computer Science II
+// Program Created by Blaize Guerra
+// This program runs a probabilistic zombie outbreak simulation.
 import processing.core.PApplet;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
