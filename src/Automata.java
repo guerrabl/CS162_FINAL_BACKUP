@@ -2,22 +2,23 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 public abstract class Automata {
-    public static ArrayList<ParticleSystem> explosions = new ArrayList<ParticleSystem>();
-    public static int SMALLER_THAN_ODDS;
-    public static int EQUIVALENT_ODDS;
-    public static int LARGER_THAN_ODDS;
+    public static int SMALLER_THAN_ODDS = 10;
+    public static int EQUIVALENT_ODDS = 50;
+    public static int LARGER_THAN_ODDS = 90;
     public boolean dead;
-    public int xPosition;
-    public int yPosition;
+    public boolean currentlyInBattle;
+    public float xPosition;
+    public float yPosition;
     public PApplet p;
     public int size;
     int colour;
 
 
-    Automata(PApplet p, int xPosition, int yPosition){
+    Automata(PApplet p, float xPosition, float yPosition){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.dead = false;
+        this.currentlyInBattle = false;
         this.p = p;
     }
 
@@ -29,11 +30,11 @@ public abstract class Automata {
     public int probabilisticSize(){
         int randomNumber = (int) this.p.random(90);
         if (randomNumber < 30){
-            return 15;
+            return (int) p.random(4,12);
         } else if (randomNumber < 60){
-            return 30;
+            return (int) p.random(12,24);
         } else {
-            return 45;
+            return (int) p.random(24,36);
         }
     }
 
@@ -51,18 +52,26 @@ public abstract class Automata {
 
 
     public void addToExplosions(PApplet p){
-        this.explosions.add(new ParticleSystem(this.getxPosition(), this.getyPosition(), p));
+        Mob.explosions.add(new ParticleSystem(this.getxPosition(), this.getyPosition(), p));
     }
 
-    public int getxPosition() {
+    public float getxPosition() {
         return xPosition;
+    }
+
+    public boolean isCurrentlyInBattle() {
+        return currentlyInBattle;
+    }
+
+    public void setCurrentlyInBattle() {
+        this.currentlyInBattle = !this.currentlyInBattle;
     }
 
     public void setxPosition(int xPosition) {
         this.xPosition = xPosition;
     }
 
-    public int getyPosition() {
+    public float getyPosition() {
         return yPosition;
     }
 
@@ -79,6 +88,5 @@ public abstract class Automata {
     }
 
     public abstract void walk();
-    public abstract void initiateDecisionTree(Automata a);
 
 }

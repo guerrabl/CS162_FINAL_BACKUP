@@ -4,7 +4,7 @@ import acm.util.*;
 
 
 public abstract class Mob {
-
+    public static ArrayList<ParticleSystem> explosions = new ArrayList<ParticleSystem>();
     public static RandomGenerator rGen = RandomGenerator.getInstance();
     public static int mobPopulation = 200;
     public PApplet p;
@@ -16,24 +16,28 @@ public abstract class Mob {
     }
 
     public int getMobPopulation() {
-
         return mobPopulation;
     }
 
     public ArrayList<Automata> getMob() {
-
         return mob;
     }
-    public void whoIsTouching(ArrayList<Automata> checkMob){
-        for(Automata a: mob){
-            for(Automata z: checkMob){
-                if (a.detectCollision(z)){
 
-                }
+    void removeFromSimulation(Automata a) {
+        mob.remove(a);
+    }
+    public void listenForDead(){
+        for(int i = mob.size()-1; i >= 0; i--) {
+            Automata a = mob.get(i);
+            if (a.isDead()) {
+                this.mob.remove(a);
             }
         }
     }
-    abstract void removeFromSimulation();
-    abstract void addToSimulation();
+
+    void addToSimulation(Automata a) {
+        mob.add(a);
+    }
+
     abstract void fillMob();
 }

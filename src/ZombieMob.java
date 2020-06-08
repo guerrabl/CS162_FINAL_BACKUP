@@ -12,8 +12,10 @@ public class ZombieMob extends Mob{
     @Override
     public void fillMob(){
         for(int i=0; i < mobPopulation; ++i){
+            float randomXPosition =  p.random(0, p.width);
+            float randomYPosition =  p.random(-10, p.height*.15f);
             if(rGen.nextBoolean()){
-                mob.add(new Zombie(this.p,(int) p.random(0, p.width),(int) p.random(0, p.height/2)));
+                mob.add(new Zombie(this.p, randomXPosition ,randomYPosition));
             }
         }
     }
@@ -22,15 +24,6 @@ public class ZombieMob extends Mob{
             a.display();
             a.walk();
         }
-    }
-    @Override
-    void removeFromSimulation(Zombie zombie) {
-        mob.
-    }
-
-    @Override
-    void addToSimulation() {
-
     }
 
 }

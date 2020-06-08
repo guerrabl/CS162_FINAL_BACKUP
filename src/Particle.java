@@ -22,7 +22,7 @@ public class Particle {
         size = p.random(10, 20);
     }
 
-    Particle(int x, int y, PApplet p) {
+    Particle(float x, float y, PApplet p) {
         this.x = x;
         this.y = y;
         this.p=p;
